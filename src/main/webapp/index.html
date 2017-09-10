@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ch.teko.ntb.endpoints.NoticeResource Book</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+<p>ch.teko.ntb.endpoints.NoticeResource Book</p>
+
+<h1>Endpoint user:</h1>
+<p>/api/user/info</p>
+<pre>$.get('http://localhost:8080/ntb/api/user/info', function(res) {
+  console.info(res);
+});</pre>
+<hr/>
+
+<p>/api/user/login</p>
+<pre>$.ajax({
+    method: 'POST',
+    url: 'http://localhost:8080/ntb/api/user/login',
+    dataType: 'json', // or xml, ...
+    contentType: 'application/json',
+    data: JSON.stringify({email: 'test@example.com', password: '123456'}),
+    success: function(res) {
+        console.info(res);
+    },
+    error: function(err) {
+        console.info(err);
+    }
+});</pre>
+<hr/>
+
+<p>/api/user/signup</p>
+<pre>$.ajax({
+    method: 'POST',
+    url: 'http://localhost:8080/ntb/api/user/signup',
+    contentType: 'application/json',
+    data: JSON.stringify({email: 'test@example.com', password: '123456'}),
+    success: function(res) {
+        console.info(res);
+    },
+    error: function(err) {
+        console.info(err);
+    }
+});</pre>
+<hr/>
+
+<h1>Endpoint Notice</h1>
+<p>/api/notice/info</p>
+<pre>$.get('http://localhost:8080/ntb/api/notice/info', function(res) {
+  console.info(res);
+});</pre>
+<hr/>
+
+<p>/api/notice/addNote</p>
+<pre>$.ajax({
+    method: 'POST',
+    url: 'http://localhost:8080/ntb/api/notice/addNote',
+    contentType: 'application/json',
+    headers: {
+        "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJVU0VSX0lEIjoxLCJleHAiOjE1MDU2ODM3NzQsImlhdCI6MTUwNTA3ODk3NH0.BfQwBqwawAnQZU-krGZX-GzjVYCwhFBmCV2G3EiiunkvRs7pJ1Gj0B5UpecN5syZ2TXAbgO5cqS-aooGbZf22g"
+    },
+    data: JSON.stringify({title: 'notice title example', text: 'example notice text.... Lorem ipsum dolor ...'}),
+    success: function(res) {
+        console.info(res);
+    },
+    error: function(err) {
+        console.info(err);
+    }
+});</pre>
+<hr/>
+
+<p>/api/notice/updateNote</p>
+<pre>$.ajax({
+    method: 'PUT',
+    async: true,
+    cache: false,
+    contentType: 'application/json',
+    url: 'http://localhost:8080/ntb/api/notice/updateNote',
+    headers: {
+        "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJVU0VSX0lEIjoxLCJleHAiOjE1MDU2MDI2MjUsImlhdCI6MTUwNDk5NzgyNX0.Ka8oBAY8kjEiKkEmCCiJIi8DqNlgMxJV8H1jiJFeH5myZ4qIbnYkpFPVMR387z1nnm0qSBt7-QBcxDEXWl_kMA"
+    },
+    data: JSON.stringify({id: '2', title: 'new title!!!', text: 'new content...'}),
+    success: function(res) {
+        console.info(res);
+    },
+    error: function(err) {
+        console.info(err);
+    }
+});</pre>
+<hr/>
+
+<p>/api/notice/deleteNote/{id}</p>
+<pre>$.ajax({
+    method: 'DELETE',
+    url: 'http://localhost:8080/ntb/api/notice/deleteNote/2',
+    headers: {
+        "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJVU0VSX0lEIjoxLCJleHAiOjE1MDU2MDI2MjUsImlhdCI6MTUwNDk5NzgyNX0.Ka8oBAY8kjEiKkEmCCiJIi8DqNlgMxJV8H1jiJFeH5myZ4qIbnYkpFPVMR387z1nnm0qSBt7-QBcxDEXWl_kMA"
+    },
+    success: function(res) {
+        console.info(res);
+    },
+    error: function(err) {
+        console.info(err);
+    }
+});</pre>
+<hr/>
+
+
+</body>
+</html>
