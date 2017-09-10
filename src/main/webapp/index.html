@@ -75,10 +75,8 @@
 <p>/api/notice/updateNote</p>
 <pre>$.ajax({
     method: 'PUT',
-    async: true,
-    cache: false,
-    contentType: 'application/json',
     url: 'http://localhost:8080/ntb/api/notice/updateNote',
+    contentType: 'application/json',
     headers: {
         "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJVU0VSX0lEIjoxLCJleHAiOjE1MDU2MDI2MjUsImlhdCI6MTUwNDk5NzgyNX0.Ka8oBAY8kjEiKkEmCCiJIi8DqNlgMxJV8H1jiJFeH5myZ4qIbnYkpFPVMR387z1nnm0qSBt7-QBcxDEXWl_kMA"
     },
