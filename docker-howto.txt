@@ -1,0 +1,17 @@
+
+# mysql db in Docker Container aufsetzen:
+docker run -d --name=mysqldb -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=ntb -e MYSQL_USER=root -e MYSQL_PASSWORD=1234 mysql:5.7
+
+# der j2ee container (z.B. Pajara oder Wildly) muss den mysql Container mit —llink als Datenquelle angeben.
+#docker run -it -p 8080:8080 —-link db:db jboss/wildfly —-name app
+docker run --name mywildfly --link mysqldb:/mysql -p 8080:8080 -it jboss/wildfly /bin/bash
+
+docker run --name app -p 8080:8080 -it jboss/wildfly /bin/bash
+
+
+
+#copy war into container dockerfile
+ADD ntb.war /opt/jboss/wildfly/standalone/deployments/
+#copy war into container from cmd
+docker cp ntb.war mywildfly:/opt/jboss/wildfly/standalone/deployments/ntb.war
+

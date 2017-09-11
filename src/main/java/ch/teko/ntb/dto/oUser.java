@@ -17,10 +17,7 @@ public class oUser {
   private String email;
   private String jwtToken;
 
-  private List<Notice> noticeList;
-
   public oUser() {
-    noticeList = new ArrayList<>();
   }
 
   public oUser(int id, String email) {
@@ -54,20 +51,4 @@ public class oUser {
     this.jwtToken = jwtToken;
   }
 
-  public List<Notice> getNoticeList() {
-    return noticeList;
-  }
-
-  public void addNotice(Notice notice) {
-    noticeList.add(notice);
-  }
-
-  public void addNoticeList(List<Notice> noticeList) {
-    this.noticeList.clear();
-    this.noticeList.addAll(noticeList);
-  }
-
-  public void deleteNotice(Notice notice) {
-    noticeList.remove(notice);
-  }
 }

@@ -6,6 +6,7 @@ import ch.teko.ntb.model.Notice;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 /**
  * Created by antic-software-ing on 04.09.2017.
@@ -25,6 +26,21 @@ public class NoticeResource extends AbstractInjector {
   public Response getInfo() {
     // http://localhost:8080/rest/hello/get/theMessage
     return Response.status(200).entity("it works...").build();
+  }
+
+  @GET()
+  @Path("getNotes")
+  public Response getNotes(@HeaderParam("Authorization") String jwtToken) {
+    try {
+      List<Notice> noticeList = noticeManager.getNotes(jwtToken);
+      return Response
+              .status(200)
+              .entity(noticeList)
+              .build();
+    } catch (Exception e) {
+      System.err.println("error:" + e.getMessage());
+      return Response.status(401).entity("change notice fail!").build();
+    }
   }
 
   @POST

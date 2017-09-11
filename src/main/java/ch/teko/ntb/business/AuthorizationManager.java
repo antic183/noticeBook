@@ -17,8 +17,6 @@ public class AuthorizationManager {
 
   @Inject
   private IAuthorizationDal dbAuthorization;
-  @Inject
-  private INoticeDal dbNotice;
 
   /**
    * login return user-dto with jwt-token and his noticelist
@@ -26,9 +24,6 @@ public class AuthorizationManager {
   public oUser login(User user) throws Exception {
     // db login
     oUser userDto = dbAuthorization.login(user);
-    // db get notices
-    List<Notice> noticeList = dbNotice.getNotesByUserId(userDto.getId());
-    userDto.addNoticeList(noticeList);
     // create and set jwt token
     String jwtToken = TokenHandler.createToken(userDto);
     userDto.setJwtToken(jwtToken);
