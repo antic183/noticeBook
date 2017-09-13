@@ -1,17 +1,37 @@
+﻿1.
+docker run --name mysql_db -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+docker cp init.sql mysql_db:/home/init.sql
+docker exec -it mysql_db bash
+> cd /home
+> mysql -u root -p
+> 123456
+mysql> source init.sql
+mysql> \q
 
-# mysql db in Docker Container aufsetzen:
-docker run -d --name=mysqldb -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=ntb -e MYSQL_USER=root -e MYSQL_PASSWORD=1234 mysql:5.7
+2.
+docker run --name app --link mysql_db:db -p 8080:8080 -d jboss/wildfly
+docker cp target/ntb.war app:/opt/jboss/wildfly/standalone/deployments/ntb.war
+docker exec -it app bash
+> env
+        ---> see DB_PORT_3306_TCP, DB_PORT_3306_TCP_ADDR
 
-# der j2ee container (z.B. Pajara oder Wildly) muss den mysql Container mit —llink als Datenquelle angeben.
-#docker run -it -p 8080:8080 —-link db:db jboss/wildfly —-name app
-docker run --name mywildfly --link mysqldb:/mysql -p 8080:8080 -it jboss/wildfly /bin/bash
+> vi ~/.bash_profile
+  > i
+  add:
+    MYSQL_DB_USER=username from init.sql
+    MYSQL_DB_PASSWORD=password from init.sql
+    export MYSQL_IP
+  > esc
+  > :wq
+> source ~/.bash_profile
+> env # show
 
-docker run --name app -p 8080:8080 -it jboss/wildfly /bin/bash
 
-
-
-#copy war into container dockerfile
-ADD ntb.war /opt/jboss/wildfly/standalone/deployments/
-#copy war into container from cmd
-docker cp ntb.war mywildfly:/opt/jboss/wildfly/standalone/deployments/ntb.war
-
+3. HOST:
+--> open browser: http://localhost:8080/ntb
+--> $.get('http://localhost:8080/ntb/api/info', function(res) {
+      console.info(res);
+    });
+--> $.get('http://localhost:8080/ntb/api/testConnection', function(res) {
+      console.info(res);
+    });

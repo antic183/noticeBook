@@ -1,0 +1,11 @@
+FROM mysql:5.7
+
+MAINTAINER Antic Marjan
+
+COPY setup.sh /mysql/setup.sh
+COPY init.sql /mysql/setup.sql
+#RUN /mysql/setup.sh
+
+# docker build -t marjandb 01_Docker_DB/
+# docker run --name db -e MYSQL_ROOT_PASSWORD=123456 -d marjandb
+# docker exec db ls mysql/ -l

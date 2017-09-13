@@ -3,7 +3,6 @@ package ch.teko.ntb.endpoints;
 import ch.teko.ntb.business.AuthorizationManager;
 import ch.teko.ntb.dto.oUser;
 import ch.teko.ntb.model.User;
-
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
