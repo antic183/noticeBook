@@ -24,7 +24,6 @@ public class NoticeResource extends AbstractInjector {
   @GET
   @Path("info")
   public Response getInfo() {
-    // http://localhost:8080/rest/hello/get/theMessage
     return Response.status(200).entity("it works...").build();
   }
 

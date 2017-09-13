@@ -14,16 +14,18 @@ import java.sql.DriverManager;
 
 @Path("/")
 public class InfoResource {
-  private final String DB_PORT_3306_TCP = System.getenv("DB_PORT_3306_TCP");
-  private final String MYSQL_CONTAINER_IP = System.getenv("DB_PORT_3306_TCP_ADDR");
+  private final String MYSQL_CONTAINER_IP = System.getenv("MYSQL_DB_PORT_3306_TCP_ADDR");
+  private final String MYSQL_CONTAINER_IP_AND_PORT = System.getenv("MYSQL_DB_PORT_3306_TCP");
   private final String URL = "jdbc:mysql://" + MYSQL_CONTAINER_IP + ":3306";
-  private final String USER_NAME = "root";
-  private final String PASSWORD = "123456";
+  private final String USER_NAME = System.getenv("MYSQL_DB_USER");
+  private final String PASSWORD = System.getenv("MYSQL_DB_PASSWORD");
 
   @GET
   @Path("info")
   public Response getInfo() {
-    return Response.status(200).entity("it works! DB Connection available under " + DB_PORT_3306_TCP).build();
+    String output = "it works! DB Connection available under " + MYSQL_CONTAINER_IP +". ";
+    output += USER_NAME + "-" + PASSWORD;
+    return Response.status(200).entity(output).build();
   }
 
   @GET

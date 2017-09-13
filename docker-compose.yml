@@ -1,0 +1,28 @@
+mysql:
+  build: ./docker-mysql/ #image: mysql:latest
+  container_name: "mysql_db"
+  environment:
+    MYSQL_ROOT_PASSWORD: 123456
+    #MYSQL_DATABASE: ntb
+    #MYSQL_USER: ntb_user
+    #MYSQL_PASSWORD: 1234
+  #volumes:
+    #- ./init.sql:/docker-entrypoint-initdb.d/init.sql
+wildfly:
+  build: ./docker-wildfly/
+  container_name: "app"
+  environment:
+    - MYSQL_DB_USER=ntb_user
+    - MYSQL_DB_PASSWORD=1234
+    #- MYSQL_URI=db:3306
+  links:
+    - mysql
+  ports:
+    - 8080:8080
+
+# ---> docker-compose up -d --build
+
+# Delete all containers
+#   docker rm $(docker ps -a -q) -f
+# Delete all images
+#   docker rmi $(docker images -q)

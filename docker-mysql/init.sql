@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `ntb`.`user_notice` (
 ENGINE = InnoDB;
 
 
-drop USER ntb_user@localhost;
+#drop USER ntb_user@localhost;
 
 CREATE USER ntb_user@localhost IDENTIFIED BY '1234';
 GRANT SELECT, INSERT, DELETE, UPDATE on ntb.* TO ntb_user@localhost;
