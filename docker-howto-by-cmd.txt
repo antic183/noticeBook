@@ -1,5 +1,6 @@
 ﻿1.
-docker run --name mysql_db -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+#docker run --name mysql_db -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+docker run --name mysql_db -e MYSQL_ROOT_PASSWORD=12345AaA6! -e MYSQL_USER=ntb_user -e MYSQL_PASSWORD=-_1p2P3p4P_!aAa!!_1 -d mysql
 docker cp init.sql mysql_db:/home/init.sql
 docker exec -it mysql_db bash
 > cd /home
@@ -7,6 +8,7 @@ docker exec -it mysql_db bash
 > 123456
 mysql> source init.sql
 mysql> \q
+> exit
 
 2.
 docker run --name app --link mysql_db:db -p 8080:8080 -d jboss/wildfly
@@ -15,16 +17,17 @@ docker exec -it app bash
 > env
         ---> see DB_PORT_3306_TCP, DB_PORT_3306_TCP_ADDR
 
-> vi ~/.bash_profile
-  > i
-  add:
-    MYSQL_DB_USER=username from init.sql
-    MYSQL_DB_PASSWORD=password from init.sql
-    export MYSQL_IP
-  > esc
-  > :wq
-> source ~/.bash_profile
-> env # show
+# env db_user and db_password exists allready. it's not necessary.
+#> vi ~/.bash_profile
+#  > i
+#  add:
+#    MYSQL_DB_USER=username from init.sql
+#    MYSQL_DB_PASSWORD=password from init.sql
+#    export MYSQL_IP
+#  > esc
+#  > :wq
+#> source ~/.bash_profile
+#> env # show
 
 
 3. HOST:
@@ -35,3 +38,8 @@ docker exec -it app bash
 --> $.get('http://localhost:8080/ntb/api/testConnection', function(res) {
       console.info(res);
     });
+
+# Delete all containers
+#   docker rm $(docker ps -a -q) -f
+# Delete all images
+#   docker rmi $(docker images -q)

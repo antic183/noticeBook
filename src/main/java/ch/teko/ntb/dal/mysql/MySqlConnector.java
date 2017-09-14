@@ -8,6 +8,7 @@ import java.sql.SQLException;
  * Created by antic-software-ing on 09.09.2017.
  */
 public class MySqlConnector {
+  private final String IP;
   private final String URL;
   private final String USER_NAME;
   private final String PASSWORD;
@@ -15,9 +16,10 @@ public class MySqlConnector {
   private static MySqlConnector instance;
 
   private MySqlConnector() {
-    this.URL = "jdbc:mysql://localhost:3306/ntb";
-    this.USER_NAME = "ntb_user";
-    this.PASSWORD = "1234";
+    this.IP = System.getenv("DB_PORT_3306_TCP_ADDR") != null? System.getenv("DB_PORT_3306_TCP_ADDR"): "localhost";
+    this.URL = "jdbc:mysql://" + IP + ":3306/ntb";
+    this.USER_NAME = System.getenv("DB_ENV_MYSQL_USER") != null? System.getenv("DB_ENV_MYSQL_USER") : "ntb_user";
+    this.PASSWORD = System.getenv("DB_ENV_MYSQL_PASSWORD") != null? System.getenv("DB_ENV_MYSQL_PASSWORD"): "123456";
   }
 
   private void connect() throws SQLException {

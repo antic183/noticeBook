@@ -14,11 +14,11 @@ import java.sql.DriverManager;
 
 @Path("/")
 public class InfoResource {
-  private final String MYSQL_CONTAINER_IP = System.getenv("MYSQL_DB_PORT_3306_TCP_ADDR");
-  private final String MYSQL_CONTAINER_IP_AND_PORT = System.getenv("MYSQL_DB_PORT_3306_TCP");
+  private final String MYSQL_CONTAINER_IP = System.getenv("DB_PORT_3306_TCP_ADDR");
+  private final String MYSQL_CONTAINER_IP_AND_PORT = System.getenv("DB_PORT_3306_TCP");
   private final String URL = "jdbc:mysql://" + MYSQL_CONTAINER_IP + ":3306";
-  private final String USER_NAME = System.getenv("MYSQL_DB_USER");
-  private final String PASSWORD = System.getenv("MYSQL_DB_PASSWORD");
+  private final String USER_NAME = System.getenv("DB_ENV_MYSQL_USER");
+  private final String PASSWORD = System.getenv("DB_ENV_MYSQL_PASSWORD");
 
   @GET
   @Path("info")
