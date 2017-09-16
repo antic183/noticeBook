@@ -2,3 +2,4 @@
 /target
 /ntb.iml
 /src/main/webapp/lib
+/docker-wildfly/ROOT.war

@@ -17,10 +17,10 @@ public class MySqlConnector {
 
   private MySqlConnector() {
     // docker
-    this.IP = System.getenv("DB_PORT_3306_TCP_ADDR");
+    this.IP = System.getenv("MYSQL_DB_PORT_3306_TCP_ADDR"); //MYSQL_PORT_3306_TCP_ADDR
     this.URL = "jdbc:mysql://" + IP + ":3306/ntb";
     this.USER_NAME = "ntb_user";//System.getenv("DB_ENV_MYSQL_USER");
-    this.PASSWORD = "123456";//System.getenv("DB_ENV_MYSQL_PASSWORD");
+    this.PASSWORD = "teko_secret_pw_123456";//System.getenv("DB_ENV_MYSQL_PASSWORD");
 
     // local
     /*this.IP = "localhost";

@@ -11,7 +11,7 @@
 
 <h1>Endpoint user:</h1>
 <p>/api/user/info</p>
-<pre>$.get('http://localhost:8080/ntb/api/user/info', function(res) {
+<pre>$.get('/api/user/info', function(res) {
   console.info(res);
 });</pre>
 <hr/>
@@ -19,7 +19,7 @@
 <p>/api/user/login</p>
 <pre>$.ajax({
     method: 'POST',
-    url: 'http://localhost:8080/ntb/api/user/login',
+    url: '/api/user/login',
     dataType: 'json', // or xml, ...
     contentType: 'application/json',
     data: JSON.stringify({email: 'test@example.com', password: '123456'}),
@@ -35,7 +35,7 @@
 <p>/api/user/signup</p>
 <pre>$.ajax({
     method: 'POST',
-    url: 'http://localhost:8080/ntb/api/user/signup',
+    url: '/api/user/signup',
     contentType: 'application/json',
     data: JSON.stringify({email: 'test@example.com', password: '123456'}),
     success: function(res) {
@@ -49,7 +49,7 @@
 
 <h1>Endpoint Notice</h1>
 <p>/api/notice/info</p>
-<pre>$.get('http://localhost:8080/ntb/api/notice/info', function(res) {
+<pre>$.get('/api/notice/info', function(res) {
   console.info(res);
 });</pre>
 <hr/>
@@ -58,7 +58,7 @@
 <p>/api/notice/getNotes</p>
 <pre>$.ajax({
     method: 'GET',
-    url: 'http://localhost:8080/ntb/api/notice/getNotes',
+    url: '/api/notice/getNotes',
     dataType: 'json',
     headers: {
         "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJVU0VSX0lEIjoxLCJleHAiOjE1MDU2ODM3NzQsImlhdCI6MTUwNTA3ODk3NH0.BfQwBqwawAnQZU-krGZX-GzjVYCwhFBmCV2G3EiiunkvRs7pJ1Gj0B5UpecN5syZ2TXAbgO5cqS-aooGbZf22g"
@@ -75,7 +75,7 @@
 <p>/api/notice/addNote</p>
 <pre>$.ajax({
     method: 'POST',
-    url: 'http://localhost:8080/ntb/api/notice/addNote',
+    url: '/api/notice/addNote',
     contentType: 'application/json',
     headers: {
         "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJVU0VSX0lEIjoxLCJleHAiOjE1MDU2ODM3NzQsImlhdCI6MTUwNTA3ODk3NH0.BfQwBqwawAnQZU-krGZX-GzjVYCwhFBmCV2G3EiiunkvRs7pJ1Gj0B5UpecN5syZ2TXAbgO5cqS-aooGbZf22g"
@@ -93,7 +93,7 @@
 <p>/api/notice/updateNote</p>
 <pre>$.ajax({
     method: 'PUT',
-    url: 'http://localhost:8080/ntb/api/notice/updateNote',
+    url: '/api/notice/updateNote',
     contentType: 'application/json',
     headers: {
         "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJVU0VSX0lEIjoxLCJleHAiOjE1MDU2MDI2MjUsImlhdCI6MTUwNDk5NzgyNX0.Ka8oBAY8kjEiKkEmCCiJIi8DqNlgMxJV8H1jiJFeH5myZ4qIbnYkpFPVMR387z1nnm0qSBt7-QBcxDEXWl_kMA"
@@ -111,7 +111,7 @@
 <p>/api/notice/deleteNote/{id}</p>
 <pre>$.ajax({
     method: 'DELETE',
-    url: 'http://localhost:8080/ntb/api/notice/deleteNote/2',
+    url: '/api/notice/deleteNote/2',
     headers: {
         "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJVU0VSX0lEIjoxLCJleHAiOjE1MDU2MDI2MjUsImlhdCI6MTUwNDk5NzgyNX0.Ka8oBAY8kjEiKkEmCCiJIi8DqNlgMxJV8H1jiJFeH5myZ4qIbnYkpFPVMR387z1nnm0qSBt7-QBcxDEXWl_kMA"
     },

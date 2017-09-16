@@ -13,24 +13,12 @@ mysql> \q
 
 2.
 docker run --name app --link mysql_db:db -p 8080:8080 -d jboss/wildfly
+docker run --name app --link mysql_db:db -p 8843:8843 -p 8080:8080 -d jboss/wildfly
 # with debug console
-docker run --name app --link mysql_db:db -it jboss/wildfly /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0
+#docker run --name app --link mysql_db:db -it jboss/wildfly /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0
 docker cp target/ntb.war app:/opt/jboss/wildfly/standalone/deployments/ntb.war
 docker exec -it app bash
 > env
-        ---> see DB_PORT_3306_TCP, DB_PORT_3306_TCP_ADDR
-
-# env db_user and db_password exists allready. it's not necessary.
-#> vi ~/.bash_profile
-#  > i
-#  add:
-#    MYSQL_DB_USER=username from init.sql
-#    MYSQL_DB_PASSWORD=password from init.sql
-#    export MYSQL_IP
-#  > esc
-#  > :wq
-#> source ~/.bash_profile
-#> env # show
 
 
 3. HOST:

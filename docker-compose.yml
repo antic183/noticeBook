@@ -2,7 +2,7 @@ mysql:
   build: ./docker-mysql/ #image: mysql:latest
   container_name: "mysql_db"
   environment:
-    MYSQL_ROOT_PASSWORD: 123456
+    MYSQL_ROOT_PASSWORD: teko_secret_root_pw_123456
     #MYSQL_DATABASE: ntb
     #MYSQL_USER: ntb_user
     #MYSQL_PASSWORD: 1234
@@ -11,9 +11,9 @@ mysql:
 wildfly:
   build: ./docker-wildfly/
   container_name: "app"
-  environment:
-    - MYSQL_DB_USER=ntb_user
-    - MYSQL_DB_PASSWORD=1234
+  #environment:
+    #- MYSQL_DB_USER=ntb_user
+    #- MYSQL_DB_PASSWORD=1234
     #- MYSQL_URI=db:3306
   links:
     - mysql
