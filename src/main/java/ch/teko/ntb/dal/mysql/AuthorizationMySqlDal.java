@@ -59,7 +59,7 @@ public class AuthorizationMySqlDal implements IAuthorizationDal {
       preparedStatement.close();
     } catch (SQLException e) {
       error = true;
-      errorMsg = "Sql login error.";
+      errorMsg = "Sql login error: " + e.getMessage();
       e.printStackTrace();
     } finally {
       try {
@@ -109,7 +109,7 @@ public class AuthorizationMySqlDal implements IAuthorizationDal {
       preparedStatement.close();
     } catch (SQLException e) {
       error = true;
-      errorMsg = "Sql signup error";
+      errorMsg = "Sql signup error: " + e.getMessage();
       e.printStackTrace();
     } finally {
       try {

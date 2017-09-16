@@ -16,10 +16,17 @@ public class MySqlConnector {
   private static MySqlConnector instance;
 
   private MySqlConnector() {
-    this.IP = System.getenv("DB_PORT_3306_TCP_ADDR") != null? System.getenv("DB_PORT_3306_TCP_ADDR"): "localhost";
+    // docker
+    this.IP = System.getenv("DB_PORT_3306_TCP_ADDR");
     this.URL = "jdbc:mysql://" + IP + ":3306/ntb";
-    this.USER_NAME = System.getenv("DB_ENV_MYSQL_USER") != null? System.getenv("DB_ENV_MYSQL_USER") : "ntb_user";
-    this.PASSWORD = System.getenv("DB_ENV_MYSQL_PASSWORD") != null? System.getenv("DB_ENV_MYSQL_PASSWORD"): "123456";
+    this.USER_NAME = "ntb_user";//System.getenv("DB_ENV_MYSQL_USER");
+    this.PASSWORD = "123456";//System.getenv("DB_ENV_MYSQL_PASSWORD");
+
+    // local
+    /*this.IP = "localhost";
+    this.URL = "jdbc:mysql://" + IP + ":3306/ntb";
+    this.USER_NAME = "ntb_user";
+    this.PASSWORD = ".........";*/
   }
 
   private void connect() throws SQLException {
@@ -28,10 +35,10 @@ public class MySqlConnector {
       conn = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
     } catch (SQLException e) {
       e.printStackTrace();
-      throw new SQLException("Sql Connection error");
+      throw new SQLException("Sql Connection error on " + URL);
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
-      throw new SQLException("Sql Connection error");
+      throw new SQLException("Sql Connection error on " + URL);
     }
   }
 

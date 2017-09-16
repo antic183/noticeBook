@@ -1,6 +1,7 @@
 ﻿1.
-#docker run --name mysql_db -e MYSQL_ROOT_PASSWORD=123456 -d mysql
-docker run --name mysql_db -e MYSQL_ROOT_PASSWORD=12345AaA6! -e MYSQL_USER=ntb_user -e MYSQL_PASSWORD=-_1p2P3p4P_!aAa!!_1 -d mysql
+docker run --name mysql_db -e MYSQL_ROOT_PASSWORD=1234 -d mysql
+#docker run --name mysql_db -e MYSQL_ROOT_PASSWORD=12345AaA6! -e MYSQL_USER=ntb_user -e MYSQL_PASSWORD=-_1p2P3p4P_!aAa!!_1 -d mysql
+# --> create user on init.sql
 docker cp init.sql mysql_db:/home/init.sql
 docker exec -it mysql_db bash
 > cd /home
@@ -12,6 +13,8 @@ mysql> \q
 
 2.
 docker run --name app --link mysql_db:db -p 8080:8080 -d jboss/wildfly
+# with debug console
+docker run --name app --link mysql_db:db -it jboss/wildfly /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0
 docker cp target/ntb.war app:/opt/jboss/wildfly/standalone/deployments/ntb.war
 docker exec -it app bash
 > env

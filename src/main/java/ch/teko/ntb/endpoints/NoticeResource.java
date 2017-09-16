@@ -27,7 +27,7 @@ public class NoticeResource extends AbstractInjector {
     return Response.status(200).entity("it works...").build();
   }
 
-  @GET()
+  @GET
   @Path("getNotes")
   public Response getNotes(@HeaderParam("Authorization") String jwtToken) {
     try {

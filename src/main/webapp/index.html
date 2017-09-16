@@ -54,6 +54,24 @@
 });</pre>
 <hr/>
 
+
+<p>/api/notice/getNotes</p>
+<pre>$.ajax({
+    method: 'GET',
+    url: 'http://localhost:8080/ntb/api/notice/getNotes',
+    dataType: 'json',
+    headers: {
+        "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJVU0VSX0lEIjoxLCJleHAiOjE1MDU2ODM3NzQsImlhdCI6MTUwNTA3ODk3NH0.BfQwBqwawAnQZU-krGZX-GzjVYCwhFBmCV2G3EiiunkvRs7pJ1Gj0B5UpecN5syZ2TXAbgO5cqS-aooGbZf22g"
+    },
+    success: function(res) {
+        console.info(res);
+    },
+    error: function(err) {
+        console.info(err);
+    }
+});
+</pre>
+
 <p>/api/notice/addNote</p>
 <pre>$.ajax({
     method: 'POST',

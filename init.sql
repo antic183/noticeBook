@@ -62,7 +62,7 @@ ENGINE = InnoDB;
 
 -- docker
 #drop USER ntb_user;
-#CREATE USER ntb_user IDENTIFIED BY '123456';
+CREATE USER ntb_user IDENTIFIED BY '123456';
 GRANT SELECT, INSERT, DELETE, UPDATE on ntb.* TO ntb_user;
 #SELECT * FROM mysql.user; -- check user;
-SHOW GRANTS FOR ntb_user;
+#SHOW GRANTS FOR ntb_user;
