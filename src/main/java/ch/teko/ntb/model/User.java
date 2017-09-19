@@ -2,17 +2,15 @@ package ch.teko.ntb.model;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
 
 /**
  * Created by antic-software-ing on 04.09.2017.
  */
 
-@XmlRootElement
-public class User {
+public class User implements Serializable {
+  private static final long serialVersionUID = 1L;
 
   private int id;
   @Size(min = 2, max = 255)

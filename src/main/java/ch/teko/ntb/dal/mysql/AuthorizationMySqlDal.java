@@ -2,7 +2,7 @@ package ch.teko.ntb.dal.mysql;
 
 import ch.teko.ntb.business.util.SecureHash;
 import ch.teko.ntb.dal.interfaces.IAuthorizationDal;
-import ch.teko.ntb.dto.oUser;
+import ch.teko.ntb.dto.UserDto;
 import ch.teko.ntb.model.User;
 
 import java.sql.*;
@@ -25,9 +25,9 @@ public class AuthorizationMySqlDal implements IAuthorizationDal {
 
 
   @Override
-  public oUser login(User user) throws Exception {
+  public UserDto login(User user) throws Exception {
     Connection connection;
-    oUser userDto = null;
+    UserDto userDto = null;
     boolean error = false;
     String errorMsg = "";
 
@@ -45,7 +45,7 @@ public class AuthorizationMySqlDal implements IAuthorizationDal {
         String dbPassword = rs.getString("u.password");
 
         if (SecureHash.checkPassword(user.getPassword(), dbPassword)) {
-          userDto = new oUser(dbUserId, dbEmail);
+          userDto = new UserDto(dbUserId, dbEmail);
         } else {
           errorMsg = "invalid password";
           throw new SQLException(errorMsg);
@@ -82,7 +82,7 @@ public class AuthorizationMySqlDal implements IAuthorizationDal {
   @Override
   public int signup(User user) throws Exception {
     Connection connection;
-    oUser userDto = null;
+    UserDto userDto = null;
     boolean error = false;
     String errorMsg = "";
     int userId = 0;

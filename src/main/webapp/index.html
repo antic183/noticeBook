@@ -2,25 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ch.teko.ntb.endpoints.NoticeResource Book</title>
+    <title>NoticeBook</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
 
-<p>ch.teko.ntb.endpoints.NoticeResource Book</p>
+<h1>NoticeBook</h1>
 
-<h1>Endpoint user:</h1>
-<p>/api/user/info</p>
-<pre>$.get('/api/user/info', function(res) {
-  console.info(res);
-});</pre>
-<hr/>
-
-<p>/api/user/login</p>
+<h2>Login</h2>
+<p>/api/login</p>
 <pre>$.ajax({
     method: 'POST',
-    url: '/api/user/login',
-    dataType: 'json', // or xml, ...
+    url: '/api/login',
+    dataType: 'json',
     contentType: 'application/json',
     data: JSON.stringify({email: 'test@example.com', password: '123456'}),
     success: function(res) {
@@ -32,10 +26,11 @@
 });</pre>
 <hr/>
 
-<p>/api/user/signup</p>
+<h2>Register</h2>
+<p>/api/register</p>
 <pre>$.ajax({
     method: 'POST',
-    url: '/api/user/signup',
+    url: '/api/register',
     contentType: 'application/json',
     data: JSON.stringify({email: 'test@example.com', password: '123456'}),
     success: function(res) {
@@ -47,21 +42,14 @@
 });</pre>
 <hr/>
 
-<h1>Endpoint Notice</h1>
-<p>/api/notice/info</p>
-<pre>$.get('/api/notice/info', function(res) {
-  console.info(res);
-});</pre>
-<hr/>
-
-
-<p>/api/notice/getNotes</p>
+<h2>Notices</h2>
+<p>/api/notices</p>
 <pre>$.ajax({
     method: 'GET',
-    url: '/api/notice/getNotes',
+    url: '/api/notices',
     dataType: 'json',
     headers: {
-        "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJVU0VSX0lEIjoxLCJleHAiOjE1MDU2ODM3NzQsImlhdCI6MTUwNTA3ODk3NH0.BfQwBqwawAnQZU-krGZX-GzjVYCwhFBmCV2G3EiiunkvRs7pJ1Gj0B5UpecN5syZ2TXAbgO5cqS-aooGbZf22g"
+        "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJVU0VSX0lEIjoxLCJleHAiOjE1MDY0NTc3OTcsImlhdCI6MTUwNTg1Mjk5N30.h59nQBryvk6OiXu9GVBweKIRxmUaCxiZbnLmbSvmbby0xMuuEVu0eW59SQO6DULofO2tqk7dKIF_9zqySDMEcQ"
     },
     success: function(res) {
         console.info(res);
@@ -72,13 +60,30 @@
 });
 </pre>
 
-<p>/api/notice/addNote</p>
+<p>/api/notices</p>
+<pre>$.ajax({
+    method: 'GET',
+    url: '/api/notices/2',
+    dataType: 'json',
+    headers: {
+        "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJVU0VSX0lEIjoxLCJleHAiOjE1MDY0NTc3OTcsImlhdCI6MTUwNTg1Mjk5N30.h59nQBryvk6OiXu9GVBweKIRxmUaCxiZbnLmbSvmbby0xMuuEVu0eW59SQO6DULofO2tqk7dKIF_9zqySDMEcQ"
+    },
+    success: function(res) {
+        console.info(res);
+    },
+    error: function(err) {
+        console.info(err);
+    }
+});
+</pre>
+
+<p>/api/notices</p>
 <pre>$.ajax({
     method: 'POST',
-    url: '/api/notice/addNote',
+    url: '/api/notices',
     contentType: 'application/json',
     headers: {
-        "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJVU0VSX0lEIjoxLCJleHAiOjE1MDU2ODM3NzQsImlhdCI6MTUwNTA3ODk3NH0.BfQwBqwawAnQZU-krGZX-GzjVYCwhFBmCV2G3EiiunkvRs7pJ1Gj0B5UpecN5syZ2TXAbgO5cqS-aooGbZf22g"
+        "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJVU0VSX0lEIjoxLCJleHAiOjE1MDY0NTc3OTcsImlhdCI6MTUwNTg1Mjk5N30.h59nQBryvk6OiXu9GVBweKIRxmUaCxiZbnLmbSvmbby0xMuuEVu0eW59SQO6DULofO2tqk7dKIF_9zqySDMEcQ"
     },
     data: JSON.stringify({title: 'notice title example', text: 'example notice text.... Lorem ipsum dolor ...'}),
     success: function(res) {
@@ -90,15 +95,15 @@
 });</pre>
 <hr/>
 
-<p>/api/notice/updateNote</p>
+<p>/api/notices</p>
 <pre>$.ajax({
     method: 'PUT',
-    url: '/api/notice/updateNote',
+    url: '/api/notices/1',
     contentType: 'application/json',
     headers: {
-        "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJVU0VSX0lEIjoxLCJleHAiOjE1MDU2MDI2MjUsImlhdCI6MTUwNDk5NzgyNX0.Ka8oBAY8kjEiKkEmCCiJIi8DqNlgMxJV8H1jiJFeH5myZ4qIbnYkpFPVMR387z1nnm0qSBt7-QBcxDEXWl_kMA"
+        "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJVU0VSX0lEIjoxLCJleHAiOjE1MDY0NTc3OTcsImlhdCI6MTUwNTg1Mjk5N30.h59nQBryvk6OiXu9GVBweKIRxmUaCxiZbnLmbSvmbby0xMuuEVu0eW59SQO6DULofO2tqk7dKIF_9zqySDMEcQ"
     },
-    data: JSON.stringify({id: '2', title: 'new title!!!', text: 'new content...'}),
+    data: JSON.stringify({title: 'new title!!!', text: 'new content...'}),
     success: function(res) {
         console.info(res);
     },
@@ -108,12 +113,12 @@
 });</pre>
 <hr/>
 
-<p>/api/notice/deleteNote/{id}</p>
+<p>/api/notices/2</p>
 <pre>$.ajax({
     method: 'DELETE',
-    url: '/api/notice/deleteNote/2',
+    url: '/api/notices/2',
     headers: {
-        "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJVU0VSX0lEIjoxLCJleHAiOjE1MDU2MDI2MjUsImlhdCI6MTUwNDk5NzgyNX0.Ka8oBAY8kjEiKkEmCCiJIi8DqNlgMxJV8H1jiJFeH5myZ4qIbnYkpFPVMR387z1nnm0qSBt7-QBcxDEXWl_kMA"
+        "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJVU0VSX0lEIjoxLCJleHAiOjE1MDY0NTc3OTcsImlhdCI6MTUwNTg1Mjk5N30.h59nQBryvk6OiXu9GVBweKIRxmUaCxiZbnLmbSvmbby0xMuuEVu0eW59SQO6DULofO2tqk7dKIF_9zqySDMEcQ"
     },
     success: function(res) {
         console.info(res);

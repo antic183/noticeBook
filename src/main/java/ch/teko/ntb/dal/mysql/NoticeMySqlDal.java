@@ -1,9 +1,10 @@
 package ch.teko.ntb.dal.mysql;
 
 import ch.teko.ntb.dal.interfaces.INoticeDal;
-import ch.teko.ntb.model.Notice;
+import ch.teko.ntb.model.Note;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +26,9 @@ public class NoticeMySqlDal implements INoticeDal {
   }
 
   @Override
-  public List<Notice> getNotesByUserId(int userId) throws Exception {
+  public List<Note> getNotes(int userId) throws Exception {
     Connection connection;
-    List<Notice> noticeList = new ArrayList<>();
+    List<Note> noticeList = new ArrayList<>();
     boolean error = false;
     String errorMsg = "";
 
@@ -47,21 +48,21 @@ public class NoticeMySqlDal implements INoticeDal {
         String dbNoticeTitle = rs.getString("n.title");
         String dbNoticeText = rs.getString("n.text");
 
-        noticeList.add(new Notice(dbNoticeId, dbNoticeTitle, dbNoticeText));
+        noticeList.add(new Note(dbNoticeId, dbNoticeTitle, dbNoticeText));
       }
 
       rs.close();
       preparedStatement.close();
     } catch (SQLException e) {
       error = true;
-      errorMsg = "Sql getNotesByUserId error.";
+      errorMsg = "Sql getNotes error.";
       e.printStackTrace();
     } finally {
       try {
         mySqlConnector.closeConnection();
       } catch (SQLException e) {
         error = true;
-        errorMsg = "Sql getNotesByUserId: close connection error.";
+        errorMsg = "Sql getNotes: close connection error.";
         e.printStackTrace();
       }
 
@@ -74,7 +75,62 @@ public class NoticeMySqlDal implements INoticeDal {
   }
 
   @Override
-  public Notice addNote(int userId, Notice notice) throws Exception {
+  public Note getNote(int userid, int noteId) throws Exception {
+    Connection connection;
+    Note note = null;
+    boolean error = false;
+    String errorMsg = "";
+
+    try {
+      connection = mySqlConnector.getConnection();
+      String query = "SELECT * FROM " + TABLE_NOTICE + " n"
+          + " JOIN " + TABLE_USER_NOTICE + " un"
+          + " ON un.notice_id=n.id"
+          + " where un.user_id=(?) AND n.id=(?)";
+
+      PreparedStatement preparedStatement = connection.prepareStatement(query);
+      preparedStatement.setInt(1, userid);
+      preparedStatement.setInt(2, noteId);
+
+      ResultSet rs = preparedStatement.executeQuery();
+      if (rs.next()) {
+        int dbNoteId = rs.getInt("n.id");
+        String dbNoteTitle = rs.getString("n.title");
+        String dbNoteText = rs.getString("n.text");
+
+        LocalDateTime dbNoticeCreatedAt = rs.getTimestamp("n.created_at").toLocalDateTime();
+
+        note = new Note(dbNoteId, dbNoteTitle, dbNoteText, dbNoticeCreatedAt);
+      } else {
+        error = true;
+        errorMsg = "note doesn't exist";
+      }
+
+      rs.close();
+      preparedStatement.close();
+    } catch (SQLException e) {
+      error = true;
+      errorMsg = "Sql get note error.";
+      e.printStackTrace();
+    } finally {
+      try {
+        mySqlConnector.closeConnection();
+      } catch (SQLException e) {
+        error = true;
+        errorMsg = "Sql get note: close connection error.";
+        e.printStackTrace();
+      }
+
+      if (error) {
+        throw new Exception(errorMsg);
+      }
+
+      return note;
+    }
+  }
+
+  @Override
+  public Note addNote(int userId, Note notice) throws Exception {
     Connection connection = null;
     boolean error = false;
     String errorMsg = "";
@@ -98,7 +154,7 @@ public class NoticeMySqlDal implements INoticeDal {
         notice.setId(noticeId);
       } else {
         error = true;
-        errorMsg = "Sql addNote error. Notice doesn't added.";
+        errorMsg = "Sql addNote error. Note doesn't added.";
       }
 
       // insert into table user_notice
@@ -111,7 +167,7 @@ public class NoticeMySqlDal implements INoticeDal {
       rs = preparedStatement.getGeneratedKeys();
       if (!rs.next()) {
         error = true;
-        errorMsg = "Sql addNote error. Notice doesn't added.";
+        errorMsg = "Sql addNote error. Note doesn't added.";
       }
 
       rs.close();
@@ -125,9 +181,9 @@ public class NoticeMySqlDal implements INoticeDal {
       if (error) {
         connection.rollback();
       }
+      connection.setAutoCommit(true);
 
       try {
-        connection.setAutoCommit(true);
         mySqlConnector.closeConnection();
       } catch (SQLException e) {
         e.printStackTrace();
@@ -144,7 +200,7 @@ public class NoticeMySqlDal implements INoticeDal {
   }
 
   @Override
-  public void updateNote(int userId, Notice notice) throws Exception {
+  public void updateNote(int userId, Note notice) throws Exception {
     Connection connection = null;
     boolean error = false;
     String errorMsg = "";
@@ -165,7 +221,7 @@ public class NoticeMySqlDal implements INoticeDal {
       int rs = preparedStatement.executeUpdate();
       if (rs == 0) {
         error = true;
-        errorMsg = "Sql updateNote error. Notice doesn't changed.";
+        errorMsg = "Sql updateNote error. Note doesn't changed.";
       }
 
       preparedStatement.close();
@@ -210,7 +266,7 @@ public class NoticeMySqlDal implements INoticeDal {
       int rs = preparedStatement.executeUpdate();
       if (rs == 0) {
         error = true;
-        errorMsg = "Delete Notice failed!";
+        errorMsg = "Delete Note failed!";
       }
       preparedStatement.close();
     } catch (SQLException e) {

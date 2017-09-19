@@ -21,12 +21,13 @@ public class MySqlConnector {
     this.URL = "jdbc:mysql://" + IP + ":3306/ntb";
     this.USER_NAME = "ntb_user";//System.getenv("DB_ENV_MYSQL_USER");
     this.PASSWORD = "teko_secret_pw_123456";//System.getenv("DB_ENV_MYSQL_PASSWORD");
-
     // local
-    /*this.IP = "localhost";
+    /*
+    this.IP = "localhost";
     this.URL = "jdbc:mysql://" + IP + ":3306/ntb";
     this.USER_NAME = "ntb_user";
-    this.PASSWORD = ".........";*/
+    this.PASSWORD = "teko_secret_pw_123456";
+    */
   }
 
   private void connect() throws SQLException {

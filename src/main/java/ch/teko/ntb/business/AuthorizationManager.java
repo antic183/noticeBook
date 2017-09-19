@@ -2,13 +2,9 @@ package ch.teko.ntb.business;
 
 import ch.teko.ntb.business.util.TokenHandler;
 import ch.teko.ntb.dal.interfaces.IAuthorizationDal;
-import ch.teko.ntb.dal.interfaces.INoticeDal;
-import ch.teko.ntb.dto.oUser;
-import ch.teko.ntb.model.Notice;
+import ch.teko.ntb.dto.UserDto;
 import ch.teko.ntb.model.User;
 import com.google.inject.Inject;
-
-import java.util.List;
 
 /**
  * Created by antic-software-ing on 08.09.2017.
@@ -21,9 +17,9 @@ public class AuthorizationManager {
   /**
    * login return user-dto with jwt-token and his noticelist
    */
-  public oUser login(User user) throws Exception {
+  public UserDto login(User user) throws Exception {
     // db login
-    oUser userDto = dbAuthorization.login(user);
+    UserDto userDto = dbAuthorization.login(user);
     // create and set jwt token
     String jwtToken = TokenHandler.createToken(userDto);
     userDto.setJwtToken(jwtToken);

@@ -1,6 +1,6 @@
 package ch.teko.ntb.business.util;
 
-import ch.teko.ntb.dto.oUser;
+import ch.teko.ntb.dto.UserDto;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -20,7 +20,7 @@ public class TokenHandler {
   private static final int TOKEN_EXPIRES = 10080;
   private static final String SECRET_KEY = "fg65050!$$'09053245äewfmjärgjysrägietä34345r$ä,lg$säet,ghk$dyfpgk";
 
-  public static String createToken(oUser userDto) throws Exception {
+  public static String createToken(UserDto userDto) throws Exception {
     String token;
     Calendar exp = Calendar.getInstance();
     exp.add(Calendar.MINUTE, TOKEN_EXPIRES);

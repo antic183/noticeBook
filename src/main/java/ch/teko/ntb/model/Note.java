@@ -1,33 +1,41 @@
 package ch.teko.ntb.model;
 
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 
 /**
  * Created by antic-software-ing on 04.09.2017.
  */
 
-@XmlRootElement
-public class Notice {
+public class Note implements Serializable {
+  private static final long serialVersionUID = 1L;
 
   private int id;
   @Size(min = 1, max = 255)
   private String title;
   @Size(min = 1, max = 255)
   private String text;
+  private LocalDateTime createdAt;
 
-  public Notice() {
+  public Note() {
   }
 
-  public Notice(String title, String text) {
+  public Note(String title, String text) {
     this.title = title;
     this.text = text;
   }
 
-  public Notice(int id, String title, String text) {
+  public Note(int id, String title, String text) {
     this(title, text);
     this.id = id;
+  }
+
+  public Note(int id, String title, String text, LocalDateTime createdAt) {
+    this(title, text);
+    this.id = id;
+    this.createdAt = createdAt;
   }
 
   public int getId() {
@@ -53,4 +61,8 @@ public class Notice {
   public void setText(String text) {
     this.text = text;
   }
+
+//  public LocalDateTime getCreatedAt() {
+//    return createdAt;
+//  }
 }

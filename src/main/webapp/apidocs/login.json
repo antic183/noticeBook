@@ -1,0 +1,37 @@
+{
+  "apiVersion" : "1",
+  "swaggerVersion" : "1.2",
+  "basePath" : "/api",
+  "resourcePath" : "/login",
+  "apis" : [ {
+    "path" : "/login",
+    "operations" : [ {
+      "method" : "POST",
+      "nickname" : "login",
+      "type" : "Response",
+      "parameters" : [ {
+        "type" : "User",
+        "paramType" : "body",
+        "name" : "user",
+        "required" : true
+      } ]
+    } ]
+  } ],
+  "models" : {
+    "User" : {
+      "id" : "User",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}
