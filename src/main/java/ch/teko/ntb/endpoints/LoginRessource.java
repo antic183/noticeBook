@@ -6,6 +6,7 @@ import ch.teko.ntb.model.User;
 
 import javax.validation.Valid;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
@@ -21,6 +22,7 @@ public class LoginRessource extends AbstractInjector {
   }
 
   @POST
+  @Produces({MediaType.APPLICATION_JSON})
   public Response login(@Valid final User user) {
     try {
       UserDto userDto = authorizationManager.login(user);
