@@ -1,14 +1,8 @@
 package ch.teko.ntb.endpoints;
 
-import ch.teko.ntb.business.AuthorizationManager;
-import ch.teko.ntb.business.util.TokenHandler;
-import ch.teko.ntb.dto.UserDto;
-import ch.teko.ntb.model.Note;
-import ch.teko.ntb.model.User;
 
-import javax.validation.Valid;
+import ch.teko.ntb.business.util.TokenHandler;
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
@@ -18,10 +12,10 @@ import javax.ws.rs.core.Response;
 public class TokenValidationRessource {
 
   @GET
-  @Path("get")
   public Response isTokenValid(@HeaderParam("Authorization") String jwtToken) {
     try {
-      TokenHandler.getUserIdByToken(jwtToken);
+      String cleanToken = jwtToken.replace("Bearer ", "");
+      TokenHandler.getUserIdByToken(cleanToken);
       return Response.noContent().build();
     } catch (Exception e) {
       return Response.status(401).entity("invalid token!").build();
