@@ -144,8 +144,8 @@ public class NoticeMySqlDal implements INoticeDal {
       // insert into table notice
       String query = "INSERT INTO " + TABLE_NOTICE + "(title, text, created_at) VALUES(?, ?, NOW())";
       PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-      preparedStatement.setString(1, notice.getText());
-      preparedStatement.setString(2, notice.getTitle());
+      preparedStatement.setString(1, notice.getTitle());
+      preparedStatement.setString(2, notice.getText());
       preparedStatement.execute();
 
       ResultSet rs = preparedStatement.getGeneratedKeys();
