@@ -2,7 +2,6 @@ package ch.teko.ntb.model;
 
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 
 /**
@@ -17,7 +16,7 @@ public class Note implements Serializable {
   private String title;
   @Size(min = 1, max = 255)
   private String text;
-  private LocalDateTime createdAt;
+  private String createdAtUtc;
 
   public Note() {
   }
@@ -32,10 +31,10 @@ public class Note implements Serializable {
     this.id = id;
   }
 
-  public Note(int id, String title, String text, LocalDateTime createdAt) {
+  public Note(int id, String title, String text, String createdAt) {
     this(title, text);
     this.id = id;
-    this.createdAt = createdAt;
+    this.createdAtUtc = createdAt;
   }
 
   public int getId() {
@@ -62,7 +61,7 @@ public class Note implements Serializable {
     this.text = text;
   }
 
-//  public LocalDateTime getCreatedAt() {
-//    return createdAt;
-//  }
+  public String getCreatedAtUtc() {
+    return createdAtUtc;
+  }
 }

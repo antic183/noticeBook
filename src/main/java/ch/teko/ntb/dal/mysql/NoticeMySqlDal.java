@@ -4,9 +4,13 @@ import ch.teko.ntb.dal.interfaces.INoticeDal;
 import ch.teko.ntb.model.Note;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * Created by antic-software-ing on 08.09.2017.
@@ -37,7 +41,7 @@ public class NoticeMySqlDal implements INoticeDal {
       String query = "SELECT * FROM " + TABLE_NOTICE + " n"
           + " JOIN " + TABLE_USER_NOTICE + " un"
           + " ON un.notice_id=n.id"
-          + " where un.user_id=(?)";
+          + " where un.user_id=(?) ORDER BY n.id DESC";
 
       PreparedStatement preparedStatement = connection.prepareStatement(query);
       preparedStatement.setInt(1, userId);
@@ -98,7 +102,9 @@ public class NoticeMySqlDal implements INoticeDal {
         String dbNoteTitle = rs.getString("n.title");
         String dbNoteText = rs.getString("n.text");
 
-        LocalDateTime dbNoticeCreatedAt = rs.getTimestamp("n.created_at").toLocalDateTime();
+        String dbNoticeCreatedAt = rs.getTimestamp("n.created_at").toLocalDateTime().format(
+            DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")
+        );
 
         note = new Note(dbNoteId, dbNoteTitle, dbNoteText, dbNoticeCreatedAt);
       } else {
@@ -142,10 +148,14 @@ public class NoticeMySqlDal implements INoticeDal {
       connection.setAutoCommit(false);
 
       // insert into table notice
-      String query = "INSERT INTO " + TABLE_NOTICE + "(title, text, created_at) VALUES(?, ?, NOW())";
+      String query = "INSERT INTO " + TABLE_NOTICE + "(title, text, created_at) VALUES(?, ?, UTC_TIMESTAMP())";
       PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
       preparedStatement.setString(1, notice.getTitle());
       preparedStatement.setString(2, notice.getText());
+//      SimpleDateFormat f = new SimpleDateFormat("yyyy-MMM-dd HH:mm:ss");
+//      f.setTimeZone(TimeZone.getTimeZone("UTC"));
+//      final String UTC = f.format(java.time.LocalDateTime.now());
+//      preparedStatement.setString(3, UTC);
       preparedStatement.execute();
 
       ResultSet rs = preparedStatement.getGeneratedKeys();
