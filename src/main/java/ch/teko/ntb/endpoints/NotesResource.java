@@ -55,7 +55,7 @@ public class NotesResource extends AbstractInjector {
 
       final URI uri = info.getAbsolutePathBuilder().path("" + noticeId).build();
       return Response.noContent().build();
-//      return Response.ok().header("Location", uri.toString()).build();
+      //return Response.ok().header("Location", uri.toString()).build(); // trouble with android client
     } catch (Exception e) {
       return Response.status(400).entity("add notice fail!").build();
     }
@@ -65,15 +65,17 @@ public class NotesResource extends AbstractInjector {
   @Path("{id}")
   public Response updateNote(
       @PathParam("id") int noticeId
-      , @Valid Note notice
       , @HeaderParam("Authorization") String jwtToken
+      , @Valid Note notice
       , @Context final UriInfo info
   ) {
     try {
       notice.setId(noticeId);
       noticeManager.updateNote(jwtToken, notice);
+
       final URI uri = info.getAbsolutePathBuilder().path("" + noticeId).build();
-      return Response.ok().header("Location", uri.toString()).build();
+      return Response.noContent().build();
+      // return Response.ok().header("Location", uri.toString()).build(); // trouble with android client
     } catch (Exception e) {
       return Response.status(400).entity("change notice fail!").build();
     }

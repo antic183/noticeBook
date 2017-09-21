@@ -1,0 +1,122 @@
+{
+  "apiVersion" : "1",
+  "swaggerVersion" : "1.2",
+  "basePath" : "/api",
+  "resourcePath" : "/notices",
+  "apis" : [ {
+    "path" : "/notices",
+    "operations" : [ {
+      "method" : "GET",
+      "nickname" : "getNotes",
+      "type" : "Response",
+      "parameters" : [ {
+        "type" : "string",
+        "paramType" : "header",
+        "name" : "Authorization"
+      } ],
+      "produces" : [ "application/json" ]
+    }, {
+      "method" : "POST",
+      "nickname" : "addNote",
+      "type" : "Response",
+      "parameters" : [ {
+        "type" : "Note",
+        "paramType" : "body",
+        "name" : "notice",
+        "required" : true
+      }, {
+        "type" : "string",
+        "paramType" : "header",
+        "name" : "Authorization"
+      } ],
+      "produces" : [ "application/json" ]
+    }, {
+      "method" : "DELETE",
+      "nickname" : "deleteNotes",
+      "type" : "Response",
+      "parameters" : [ {
+        "type" : "string",
+        "paramType" : "header",
+        "name" : "Authorization"
+      } ],
+      "produces" : [ "application/json" ]
+    } ]
+  }, {
+    "path" : "/notices/{id}",
+    "operations" : [ {
+      "method" : "GET",
+      "nickname" : "getNote",
+      "type" : "Response",
+      "parameters" : [ {
+        "type" : "integer",
+        "format" : "int32",
+        "paramType" : "path",
+        "name" : "id",
+        "required" : true
+      }, {
+        "type" : "string",
+        "paramType" : "header",
+        "name" : "Authorization"
+      } ],
+      "produces" : [ "application/json" ]
+    }, {
+      "method" : "PUT",
+      "nickname" : "updateNote",
+      "type" : "Response",
+      "parameters" : [ {
+        "type" : "integer",
+        "format" : "int32",
+        "paramType" : "path",
+        "name" : "id",
+        "required" : true
+      }, {
+        "type" : "string",
+        "paramType" : "header",
+        "name" : "Authorization"
+      }, {
+        "type" : "Note",
+        "paramType" : "body",
+        "name" : "notice",
+        "required" : true
+      } ],
+      "produces" : [ "application/json" ]
+    }, {
+      "method" : "DELETE",
+      "nickname" : "deleteNote",
+      "type" : "Response",
+      "parameters" : [ {
+        "type" : "integer",
+        "format" : "int32",
+        "paramType" : "path",
+        "name" : "id",
+        "required" : true
+      }, {
+        "type" : "string",
+        "paramType" : "header",
+        "name" : "Authorization"
+      } ],
+      "produces" : [ "application/json" ]
+    } ]
+  } ],
+  "models" : {
+    "Note" : {
+      "id" : "Note",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "title" : {
+          "type" : "string"
+        },
+        "text" : {
+          "type" : "string"
+        },
+        "createdAt" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      }
+    }
+  }
+}

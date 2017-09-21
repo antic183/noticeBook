@@ -1,0 +1,19 @@
+{
+  "apiVersion" : "1",
+  "swaggerVersion" : "1.2",
+  "basePath" : "/api",
+  "resourcePath" : "/validatetoken",
+  "apis" : [ {
+    "path" : "/validatetoken",
+    "operations" : [ {
+      "method" : "GET",
+      "nickname" : "isTokenValid",
+      "type" : "Response",
+      "parameters" : [ {
+        "type" : "string",
+        "paramType" : "header",
+        "name" : "Authorization"
+      } ]
+    } ]
+  } ]
+}
