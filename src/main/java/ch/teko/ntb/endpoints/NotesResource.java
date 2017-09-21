@@ -26,7 +26,6 @@ public class NotesResource extends AbstractInjector {
   }
 
   @GET
-  @Produces({MediaType.APPLICATION_JSON})
   public Response getNotes(@HeaderParam("Authorization") String jwtToken) {
     try {
       List<Note> noticeList = noticeManager.getNotes(jwtToken);
@@ -38,7 +37,6 @@ public class NotesResource extends AbstractInjector {
 
   @GET
   @Path("{id}")
-  @Produces({MediaType.APPLICATION_JSON})
   public Response getNote(@PathParam("id") int noticeId, @HeaderParam("Authorization") String jwtToken) {
     try {
       Note note = noticeManager.getNote(noticeId, jwtToken);
@@ -55,7 +53,8 @@ public class NotesResource extends AbstractInjector {
       int noticeId = newNotice.getId();
 
       final URI uri = info.getAbsolutePathBuilder().path("" + noticeId).build();
-      return Response.ok().header("Location", uri.toString()).build();
+      return Response.noContent().build();
+//      return Response.ok().header("Location", uri.toString()).build();
     } catch (Exception e) {
       return Response.status(400).entity("add notice fail!").build();
     }
