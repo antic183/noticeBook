@@ -17,6 +17,7 @@ import java.util.List;
  */
 
 @Path("notices")
+@Produces({MediaType.APPLICATION_JSON})
 public class NotesResource extends AbstractInjector {
 
   private NoticeManager noticeManager;
@@ -53,7 +54,8 @@ public class NotesResource extends AbstractInjector {
       int noticeId = newNotice.getId();
 
       final URI uri = info.getAbsolutePathBuilder().path("" + noticeId).build();
-      return Response.ok().header("Location", uri.toString()).build();
+      return Response.noContent().build();
+//      return Response.ok().header("Location", uri.toString()).build();
     } catch (Exception e) {
       return Response.status(400).entity("add notice fail!").build();
     }
