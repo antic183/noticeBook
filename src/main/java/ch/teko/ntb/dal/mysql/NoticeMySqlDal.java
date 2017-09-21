@@ -287,4 +287,49 @@ public class NoticeMySqlDal implements INoticeDal {
       }
     }
   }
+
+  @Override
+  public void deleteAllNotes(int userId) throws Exception {
+    Connection connection = null;
+    boolean error = false;
+    String errorMsg = "";
+
+    try {
+      connection = mySqlConnector.getConnection();
+      // der user darf nur die notices löschen die auch ihm gehören.
+      // um dies sicherzustellen hol ich mir die notice_id durch die unterabfrage auf die tabelle notice_user
+      String query = "DELETE FROM " + TABLE_NOTICE
+          + " WHERE id in "
+          + "(SELECT notice_id from " + TABLE_USER_NOTICE + " un"
+          + " WHERE un.user_id=?)";
+
+      PreparedStatement preparedStatement = connection.prepareStatement(query);
+      preparedStatement.setInt(1, userId);
+
+      int rs = preparedStatement.executeUpdate();
+      if (rs == 0) {
+        error = true;
+        errorMsg = "Delete all Notes failed!";
+      }
+      preparedStatement.close();
+    } catch (SQLException e) {
+      error = true;
+      e.printStackTrace();
+      errorMsg = "sql deleteAllNotes error";
+    } finally {
+      try {
+        mySqlConnector.closeConnection();
+      } catch (SQLException e) {
+        e.printStackTrace();
+        error = true;
+        errorMsg = "Sql deleteAllNotes: close connection error";
+      }
+
+      if (error) {
+        throw new Exception(errorMsg);
+      }
+    }
+  }
+
+
 }

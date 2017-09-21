@@ -45,7 +45,9 @@ public class NoticeManager {
     return note;
   }
 
-  public void deleteAllNotes(String jwtToken) {
+  public void deleteAllNotes(String jwtToken) throws Exception {
+    int userId = getUserIdByToken(jwtToken);
+    dbNotice.deleteAllNotes(userId);
   }
 
   private int getUserIdByToken(String token) throws Exception {

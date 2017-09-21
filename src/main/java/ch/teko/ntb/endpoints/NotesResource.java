@@ -54,7 +54,7 @@ public class NotesResource extends AbstractInjector {
       int noticeId = newNotice.getId();
 
       final URI uri = info.getAbsolutePathBuilder().path("" + noticeId).build();
-      return Response.noContent().build();
+      return Response.ok().build();
       //return Response.ok().header("Location", uri.toString()).build(); // trouble with android client
     } catch (Exception e) {
       return Response.status(400).entity("add notice fail!").build();
@@ -74,7 +74,7 @@ public class NotesResource extends AbstractInjector {
       noticeManager.updateNote(jwtToken, notice);
 
       final URI uri = info.getAbsolutePathBuilder().path("" + noticeId).build();
-      return Response.noContent().build();
+      return Response.ok().build();
       // return Response.ok().header("Location", uri.toString()).build(); // trouble with android client
     } catch (Exception e) {
       return Response.status(400).entity("change notice fail!").build();
@@ -83,10 +83,10 @@ public class NotesResource extends AbstractInjector {
 
   @DELETE
   @Path("{id}")
-    public Response deleteNote(@PathParam("id") int noticeId, @HeaderParam("Authorization") String jwtToken) {
+  public Response deleteNote(@PathParam("id") int noticeId, @HeaderParam("Authorization") String jwtToken) {
     try {
       noticeManager.deleteNote(jwtToken, noticeId);
-      return Response.noContent().build();
+      return Response.ok().build();
     } catch (Exception e) {
       return Response.status(400).entity("delete notice fail!").build();
     }
@@ -96,7 +96,7 @@ public class NotesResource extends AbstractInjector {
   public Response deleteNotes(@HeaderParam("Authorization") String jwtToken) {
     try {
       noticeManager.deleteAllNotes(jwtToken);
-      return Response.noContent().build();
+      return Response.ok().build();
     } catch (Exception e) {
       return Response.status(400).entity("delete notices fail!").build();
     }

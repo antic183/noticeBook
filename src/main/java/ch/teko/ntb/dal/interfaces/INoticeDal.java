@@ -19,4 +19,5 @@ public interface INoticeDal {
 
   public void deleteNote(int userId, int noticeId) throws Exception;
 
+  public void deleteAllNotes(int userId) throws Exception;
 }
